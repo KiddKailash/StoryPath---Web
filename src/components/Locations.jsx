@@ -1,5 +1,5 @@
 // src/components/Locations.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import AddEditForm from "./AddEditForm";
 import CardView from "./CardView";
@@ -7,7 +7,7 @@ import QRCodeGenerator from "./QRCodeGenerator";
 import PageTitle from "./PageTitle";
 import useProject from "../hooks/useProject";
 import useLocations from "../hooks/useLocations";
-import downloadQRCode from "../utils/downloadQRCode";
+import downloadQRCode from "../utils/downloadQrCode";
 import {
   createLocation,
   updateLocation,
