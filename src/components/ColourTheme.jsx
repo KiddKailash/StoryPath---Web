@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo } from 'react';
+import { useReducer, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeContext, useThemeContext } from '../utils/themeContext';
 

@@ -1,6 +1,6 @@
 // src/components/AskGPT.jsx
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 // MUI Component Imports
 import Box from "@mui/material/Box";

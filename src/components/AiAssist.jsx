@@ -1,6 +1,6 @@
 // src/components/AiAssist.jsx
 
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { createProject } from "../api/project-crud-commands";
 import { createLocation } from "../api/location-crud-commands";
