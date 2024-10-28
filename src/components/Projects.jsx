@@ -21,6 +21,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
+import { useTheme } from "@mui/material/styles"; // Import useTheme to access theme transitions
 
 /**
  * Projects component displays a list of projects and allows CRUD operations.
@@ -28,6 +29,7 @@ import { DataGrid } from "@mui/x-data-grid";
  * @return {JSX.Element} - The rendered Projects component.
  */
 const Projects = () => {
+  const theme = useTheme(); // Access theme
   const navigate = useNavigate();
   const { projects, loading, error, fetchAllProjects } = useProjects();
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -166,10 +168,10 @@ const Projects = () => {
     id: project.id,
     title: project.title,
     description: project.description,
-    instructions: project.instructions, // Ensure this field is included
-    initial_clue: project.initial_clue, // Include initial_clue
-    participant_scoring: project.participant_scoring, // Include participant_scoring
-    homescreen_display: project.homescreen_display, // Include homescreen_display
+    instructions: project.instructions, 
+    initial_clue: project.initial_clue, 
+    participant_scoring: project.participant_scoring, 
+    homescreen_display: project.homescreen_display, 
     is_published: project.is_published,
   }));
 
@@ -199,8 +201,10 @@ const Projects = () => {
 
   return (
     <>
-      <Grid container columnSpacing={2} rowSpacing={2}>
-        <PageTitle title="Manage Your Projects" />
+      <Grid container spacing={2}>
+        <Grid size={12}>
+          <PageTitle title="Manage Projects" />
+        </Grid>
 
         <Grid>
           <Button
@@ -209,32 +213,47 @@ const Projects = () => {
             startIcon={<AddIcon />}
             sx={{ mb: 2 }}
           >
-            Create Project
+            Project
           </Button>
         </Grid>
         <Grid>
           {/* AI Assist Button with fetchAllProjects function passed as a prop */}
           <AiAssist onJsonResponse={fetchAllProjects} />
         </Grid>
-      </Grid>
 
-      {/* Display the list of projects in DataGrid */}
-      {projects.length > 0 ? (
-        <Box sx={{ width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5, 10, 20]}
-            disableSelectionOnClick
-            autoHeight
-          />
-        </Box>
-      ) : (
-        <Typography sx={{ textAlign: "left", mt: 4 }}>
-          No projects available
-        </Typography>
-      )}
+        {/* Display the list of projects in DataGrid */}
+        {projects.length > 0 ? (
+          <Grid size={12}>
+            <Box
+              sx={{
+                maxWidth: "75vw",
+                overflowX: "auto", // Enable horizontal scrolling if needed
+                transition: theme.transitions.backgroundAndText
+              }}
+            >
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5, 10, 20]}
+                disableSelectionOnClick
+                sx={{
+                  transition: 'background-color 0.3s ease, color 0.2s ease',
+                  "& .MuiDataGrid-root": {
+                    backgroundColor: "inherit", // Ensures consistent background inside the DataGrid
+                  },
+                }}
+              />
+            </Box>
+          </Grid>
+        ) : (
+          <Grid size={12}>
+            <Typography sx={{ textAlign: "left", ml: 0.5 }}>
+              No projects available
+            </Typography>
+          </Grid>
+        )}
+      </Grid>
 
       {/* Project form for creating or editing */}
       {isFormOpen && (
