@@ -1,23 +1,26 @@
 // src/components/Projects.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddEditForm from "./AddEditForm";
 import AiAssist from "./AiAssist";
-import CardView from "./CardView";
 import PageTitle from "./PageTitle";
 import useProjects from "../hooks/useProjects";
-import { createProject, updateProject, deleteProject } from "../api/project-crud-commands";
+import {
+  createProject,
+  updateProject,
+  deleteProject,
+} from "../api/project-crud-commands";
 
 // ================================
 // MUI Component Imports
 // ================================
-import Masonry from "@mui/lab/Masonry";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
 
 /**
  * Projects component displays a list of projects and allows CRUD operations.
@@ -98,6 +101,78 @@ const Projects = () => {
     setIsFormOpen(true);
   };
 
+  // Define columns for DataGrid
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "title", headerName: "Title", width: 200 },
+    { field: "description", headerName: "Description", width: 300 },
+    {
+      field: "is_published",
+      headerName: "Published",
+      width: 100,
+      type: "boolean",
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 400,
+      sortable: false,
+      renderCell: (params) => {
+        const project = params.row;
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => navigate(`/Project/Preview/${project.id}`)}
+              sx={{ mr: 1 }}
+            >
+              Preview
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => openEditForm(project)}
+              sx={{ mr: 1 }}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => navigate(`/Project/${project.id}`)}
+              sx={{ mr: 1 }}
+            >
+              Locations
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              size="small"
+              onClick={() => handleDeleteProject(project.id)}
+            >
+              Delete
+            </Button>
+          </Box>
+        );
+      },
+    },
+  ];
+
+  // Map projects to rows
+  const rows = projects.map((project) => ({
+    id: project.id,
+    title: project.title,
+    description: project.description,
+    instructions: project.instructions, // Ensure this field is included
+    initial_clue: project.initial_clue, // Include initial_clue
+    participant_scoring: project.participant_scoring, // Include participant_scoring
+    homescreen_display: project.homescreen_display, // Include homescreen_display
+    is_published: project.is_published,
+  }));
+
   if (loading) {
     return (
       <Box
@@ -143,42 +218,18 @@ const Projects = () => {
         </Grid>
       </Grid>
 
-      {/* Display the list of projects */}
+      {/* Display the list of projects in DataGrid */}
       {projects.length > 0 ? (
-        <Masonry columns={{ xs: 1, md: 2 }} spacing={2}>
-          {projects.map((project) => (
-            <Grid key={project.id} container spacing={2}>
-              <CardView
-                key={project.id}
-                type="project"
-                title={project.title}
-                description={project.description}
-                isPublished={project.is_published}
-                buttons={[
-                  {
-                    onClick: () => navigate(`/Project/Preview/${project.id}`),
-                    label: "Preview",
-                    color: "primary",
-                  },
-                  {
-                    onClick: () => openEditForm(project),
-                    label: "Edit",
-                    color: "primary",
-                  },
-                  {
-                    onClick: () => navigate(`/Project/${project.id}`),
-                    label: "Locations",
-                  },
-                  {
-                    onClick: () => handleDeleteProject(project.id),
-                    label: "Delete",
-                    color: "error",
-                  },
-                ]}
-              />
-            </Grid>
-          ))}
-        </Masonry>
+        <Box sx={{ width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5, 10, 20]}
+            disableSelectionOnClick
+            autoHeight
+          />
+        </Box>
       ) : (
         <Typography sx={{ textAlign: "left", mt: 4 }}>
           No projects available
