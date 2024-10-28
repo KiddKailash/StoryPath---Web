@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 // ================================
@@ -30,7 +29,7 @@ const PageTitle = ({ title, subtitle = null }) => {
         }}
       >
         {/* Render the main title */}
-        <Typography variant="h2" gutterBottom>
+        <Typography variant="h2" gutterBottom sx={{fontSize: 50}}>
           {title}
         </Typography>
 

@@ -226,7 +226,7 @@ const Projects = () => {
           <Grid size={12}>
             <Box
               sx={{
-                maxWidth: "75vw",
+                maxWidth: "82vw",
                 overflowX: "auto", // Enable horizontal scrolling if needed
                 transition: theme.transitions.backgroundAndText
               }}

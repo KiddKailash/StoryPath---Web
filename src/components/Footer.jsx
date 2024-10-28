@@ -38,13 +38,13 @@ const Footer = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Grid
-          size={{ xs: 12, md: 6 }}
-          sx={{ textAlign: { xs: "center", md: "left" } }}
-        >
+        <Grid size={8} sx={{ textAlign: "left" }}>
           <Typography variant="body2">
-            © {currentYear} | Kailash Kidd, s4582256 | All rights reserved.
+            Kailash Kidd, s4582256 | © All rights reserved.
           </Typography>
+        </Grid>
+        <Grid size={4} sx={{ textAlign: "right" }}>
+          <Typography variant="body2">{currentYear} </Typography>
         </Grid>
       </Grid>
     </Box>
