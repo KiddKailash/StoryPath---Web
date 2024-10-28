@@ -122,7 +122,7 @@ const Projects = () => {
         return (
           <Box>
             <Button
-              variant="contained"
+              variant="text"
               color="primary"
               size="small"
               onClick={() => navigate(`/Project/Preview/${project.id}`)}
@@ -131,7 +131,7 @@ const Projects = () => {
               Preview
             </Button>
             <Button
-              variant="contained"
+              variant="text"
               color="primary"
               size="small"
               onClick={() => openEditForm(project)}
@@ -140,7 +140,7 @@ const Projects = () => {
               Edit
             </Button>
             <Button
-              variant="contained"
+              variant="text"
               size="small"
               onClick={() => navigate(`/Project/${project.id}`)}
               sx={{ mr: 1 }}
@@ -148,7 +148,7 @@ const Projects = () => {
               Locations
             </Button>
             <Button
-              variant="contained"
+              variant="text"
               color="error"
               size="small"
               onClick={() => handleDeleteProject(project.id)}
