@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import QRCode from "react-qr-code";
 
@@ -14,7 +13,7 @@ const QRCodeDisplay = ({ value, size }) => (
   <QRCode
     value={value}
     size={size}
-    bgColor="transparent"  // Set background color to transparent
+    bgColor="white"  // Set background color to transparent
     fgColor="currentColor" // Set foreground color to the current text color
   />
 );

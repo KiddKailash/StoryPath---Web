@@ -227,7 +227,7 @@ const Projects = () => {
             <Box
               sx={{
                 maxWidth: "82vw",
-                overflowX: "auto", // Enable horizontal scrolling if needed
+                overflowX: "auto",
                 transition: theme.transitions.backgroundAndText
               }}
             >
