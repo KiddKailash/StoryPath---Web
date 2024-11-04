@@ -36,7 +36,7 @@ const generateJson = async (apiKey, message, projectId = null) => {
               {
                 "project_id": project_id,
                 "location_name": "text",
-                "location_trigger": "QR Code" OR "Location Entry" OR "Both Location Entry and QR Code Scan",
+                "location_trigger": "QR Code" OR "Location Entry" OR "Location Entry and QR Code",
                 "location_position": "({latitude}, {longitude})",
                 "score_points": number,
                 "clue": "text",

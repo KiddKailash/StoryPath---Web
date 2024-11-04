@@ -385,10 +385,10 @@ const AddEditForm = ({
             {renderTextField("location_name", "Location Name")}
             {renderUserSelect("location_trigger", "Location Trigger", [
               { value: "Location Entry", label: "Location Entry" },
-              { value: "QR Code Scan", label: "QR Code Scan" },
+              { value: "QR Code", label: "QR Code" },
               {
-                value: "Both Location Entry and QR Code Scan",
-                label: "Both Location Entry and QR Code Scan",
+                value: "Location Entry and QR Code",
+                label: "Location Entry and QR Code",
               },
             ])}
             {renderTextField(
